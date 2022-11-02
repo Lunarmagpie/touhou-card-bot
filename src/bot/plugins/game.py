@@ -49,7 +49,6 @@ async def play(ctx: utils.Context, opponent: hikari.User) -> None:
         )
         return
 
-
     # Wait a second for visuals.
     await asyncio.sleep(0.5)
 
