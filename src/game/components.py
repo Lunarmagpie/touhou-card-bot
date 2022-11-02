@@ -3,8 +3,8 @@ from __future__ import annotations
 import flare
 
 import hikari
-from bot.game.game import Game
-from bot.game.player import Player
+from game.game import Game
+from game.player import Player
 import contextlib
 
 
@@ -27,4 +27,4 @@ async def build_card_buttons(player: Player, game: Game) -> flare.Row:
     for i in range(5):
         row.append(card_button(player, game, i).set_label(str(i)))
 
-    return await row
+    return await row  # type: ignore

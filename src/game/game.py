@@ -1,8 +1,8 @@
 import hikari
 import asyncio
 
-from bot.game.discord_game import DiscordGame
-from bot.game.player import Player
+from game.discord_game import DiscordGame
+from game.player import Player
 import time
 import utils
 import typing as t
@@ -27,7 +27,7 @@ class Game:
             await self._round()
 
     async def _round(self) -> None:
-        from bot.game.round import build_card_buttons
+        from game import components
 
         for player in self.players:
             player.clear()
@@ -37,12 +37,12 @@ class Game:
         await self.discord.respond_to_player(
             0,
             content="Select your cards:",
-            component=await build_card_buttons(self.players[0], self),
+            component=await components.build_card_buttons(self.players[0], self),
         )
         await self.discord.respond_to_player(
             1,
             content="Select your cards:",
-            component=await build_card_buttons(self.players[1], self),
+            component=await components.build_card_buttons(self.players[1], self),
         )
 
         start = time.time()

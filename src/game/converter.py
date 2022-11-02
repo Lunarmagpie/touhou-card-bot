@@ -1,6 +1,6 @@
 import flare
-from bot.game.game import Game
-from bot.game.player import Player
+from game.game import Game
+from game.player import Player
 import typing as t
 
 __all__: t.Sequence[str] = ("add_converter",)

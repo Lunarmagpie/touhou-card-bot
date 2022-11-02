@@ -4,7 +4,7 @@ import crescent
 import hikari
 import asyncio
 
-from bot.game import Game
+from game import Game
 
 plugin = utils.Plugin()
 

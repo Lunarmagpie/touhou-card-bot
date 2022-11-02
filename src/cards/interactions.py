@@ -1,5 +1,5 @@
 import enum
-from bot.cards.card import Card
+from cards.card import Card
 import typing as t
 
 __all__: t.Sequence[str] = (
