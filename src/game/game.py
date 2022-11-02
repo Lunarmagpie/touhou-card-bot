@@ -5,20 +5,12 @@ from game.discord_game import DiscordGame
 from game.player import Player
 import time
 import utils
-import typing as t
 
 
 class Game:
-    start_game_timeout: t.ClassVar[int] = 30
-
     def __init__(self, app: utils.Bot, players: tuple[hikari.User, hikari.User]) -> None:
         self.players = (Player(players[0]), Player(players[1]))
         self.discord = DiscordGame(app)
-        self._wait_for_started_event = asyncio.Event()
-
-    async def wait_until_started(self) -> bool:
-        """Wait until the game starts. Return `False` if the game timed out."""
-        return await utils.event_or_timout(self.start_game_timeout, self._wait_for_started_event)
 
     async def loop(self) -> None:
         """The main game loop"""

@@ -10,8 +10,8 @@ plugin = utils.Plugin()
 
 
 @flare.button(label="Click to accept.")
-async def accept_button(ctx: flare.Context, game: Game) -> None:
-    if game._wait_for_started_event.is_set():
+async def accept_button(ctx: flare.Context, ev: asyncio.Event, game: Game) -> None:
+    if ev.is_set():
         await ctx.respond("This interaction timed out.", flags=hikari.MessageFlag.EPHEMERAL)
         return
 
@@ -23,7 +23,7 @@ async def accept_button(ctx: flare.Context, game: Game) -> None:
         return
 
     game.discord.set_interaction(1, ctx.interaction)
-    game._wait_for_started_event.set()
+    ev.set()
     await ctx.respond(f"{game.players[1].user.mention} accepted the game.")
 
 
@@ -38,12 +38,14 @@ async def play(ctx: utils.Context, opponent: hikari.User) -> None:
 
     game.discord.set_interaction(0, ctx.interaction)
 
+    ev = asyncio.Event()
+
     await ctx.respond(
         f"{opponent.mention}, accept the challenge!!",
-        component=await flare.Row(accept_button(game)),
+        component=await flare.Row(accept_button(ev, game)),
     )
 
-    if await game.wait_until_started():
+    if await utils.event_or_timout(30, ev):
         await ctx.respond(
             f"The game could not be started because {opponent.mention} did not accept."
         )
