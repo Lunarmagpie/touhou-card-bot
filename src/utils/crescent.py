@@ -10,5 +10,6 @@ class Context(crescent.Context):
 
 
 class Plugin(crescent.Plugin):
+    @property
     def app(self) -> Bot:
-        return super().app
+        return super().app  # type: ignore

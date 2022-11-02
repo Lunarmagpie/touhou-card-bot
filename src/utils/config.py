@@ -9,4 +9,4 @@ class Config:
 
 _ENV = dotenv.dotenv_values()
 
-CONFIG = Config(token=_ENV["TOKEN"])
+CONFIG = Config(token=_ENV["TOKEN"])  # type: ignore
