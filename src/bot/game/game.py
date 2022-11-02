@@ -2,6 +2,7 @@ import hikari
 import asyncio
 
 from bot.game.discord_game import DiscordGame
+from utils.countdown import countdown
 
 import utils
 import typing as t
@@ -44,10 +45,10 @@ class Game:
         await self._send_stats()
 
         await self.discord.respond_to_player(
-            0, content="Select your cards:", component=await build_card_buttons(self)
+            0, content=f"Select your cards: {countdown(20)}", component=await build_card_buttons(self)
         )
         await self.discord.respond_to_player(
-            1, content="Select your cards:", component=await build_card_buttons(self)
+            1, content=f"Select your cards: {countdown(20)}", component=await build_card_buttons(self)
         )
 
         await asyncio.sleep(20)
