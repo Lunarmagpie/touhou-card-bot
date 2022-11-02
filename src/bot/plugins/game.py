@@ -15,7 +15,7 @@ async def accept_button(ctx: flare.Context, game: Game) -> None:
         await ctx.respond("This interaction timed out.", flags=hikari.MessageFlag.EPHEMERAL)
         return
 
-    if game.players[1].id != ctx.user.id:
+    if game.players[1].user.id != ctx.user.id:
         await ctx.respond(
             "Only the mentioned player can accept the challenge.",
             flags=hikari.MessageFlag.EPHEMERAL,
@@ -24,7 +24,7 @@ async def accept_button(ctx: flare.Context, game: Game) -> None:
 
     game.discord.set_interaction(1, ctx.interaction)
     game._wait_for_started_event.set()
-    await ctx.respond(f"{game.players[1].mention} accepted the game.")
+    await ctx.respond(f"{game.players[1].user.mention} accepted the game.")
 
 
 @plugin.include
@@ -43,13 +43,14 @@ async def play(ctx: utils.Context, opponent: hikari.User) -> None:
         component=await flare.Row(accept_button(game)),
     )
 
-    if not await game.wait_until_started():
+    if await game.wait_until_started():
         await ctx.respond(
             f"The game could not be started because {opponent.mention} did not accept."
         )
         return
 
+
     # Wait a second for visuals.
-    await asyncio.sleep(.5)
+    await asyncio.sleep(0.5)
 
     await game.loop()

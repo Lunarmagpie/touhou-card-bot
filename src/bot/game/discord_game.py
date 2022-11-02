@@ -61,16 +61,21 @@ class DiscordGame:
         )
         self.interactions[player].last_response = msg.id
 
-    async def delete_responses(self) -> None:
+    async def delete_response(self, player: int) -> None:
         """Delete emphermial responses sent to both players."""
 
-        async def task(inter: Interaction) -> None:
-            if not inter.last_response:
-                return
-            await self.app.rest.delete_webhook_message(
-                webhook=inter.webhook_id,
-                token=inter.token,
-                message=inter.last_response,
-            )
+        inter = self.interactions[player]
 
-        await asyncio.gather(*(task(inter) for inter in self.interactions))
+        if not inter.last_response:
+            return
+        id = inter.last_response
+        inter.last_response = None
+        await self.app.rest.delete_webhook_message(
+            webhook=inter.webhook_id,
+            token=inter.token,
+            message=id,
+        )
+
+    async def delete_responses(self) -> None:
+        """Delete emphermial responses sent to both players."""
+        await asyncio.gather(self.delete_response(0), self.delete_response(1))
