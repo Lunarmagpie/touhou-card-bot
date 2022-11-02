@@ -1,18 +1,31 @@
-from card import Card, Elements, Results
+import enum
+from bot.cards.card import Card
+import typing as t
 
-def interactions(card_1: Card, card_2: Card):
-   if card_1.type - card_2.type == 2:
-      return Results.P2_WIN
+__all__: t.Sequence[str] = (
+    "InteractionResults",
+    "interactions",
+)
 
-   if card_1.type - card_2.type == 3:
-      return Results.P1_WIN
 
-   if card_1.type - card_2.type in [0,1,4]:
-      if card_1.value > card_2.value:
-         return Results.P1_WIN
+class InteractionResults(enum.Enum):
+    P1_WIN = enum.auto()
+    P2_WIN = enum.auto()
+    TIE = enum.auto()
 
-      if card_1.value < card_2.value:
-         return Results.P2_WIN
 
-      return Results.TIE
+def interactions(card_1: Card, card_2: Card) -> InteractionResults:
+    if card_1.type - card_2.type == 2:
+        return InteractionResults.P2_WIN
 
+    if card_1.type - card_2.type == 3:
+        return InteractionResults.P1_WIN
+
+    if card_1.type - card_2.type in [0, 1, 4]:
+        if card_1.value > card_2.value:
+            return InteractionResults.P1_WIN
+
+        if card_1.value < card_2.value:
+            return InteractionResults.P2_WIN
+
+    return InteractionResults.TIE
