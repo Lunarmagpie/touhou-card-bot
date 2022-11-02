@@ -1,0 +1,21 @@
+[project]
+name = "touhou-card-bot"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "hikari>=2.0.0.dev111",
+    "hikari-crescent>=0.3.6",
+    "python-dotenv>=0.21.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["*"]
+namespaces = true
+
+[project.scripts]
+run = "bot:run"
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
