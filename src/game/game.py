@@ -35,7 +35,7 @@ class Game:
         for player in self.players:
             player.clear()
 
-        self.countdown = utils.countdown(21)
+        self.countdown = utils.countdown(20)
         await self._send_stats()
 
         await asyncio.gather(
@@ -66,7 +66,7 @@ class Game:
         from game import components
 
         await self.discord.respond_global(
-            content=f"These are some stats.\n{self.countdown}s Remaining",
+            content=f"Next round {self.countdown}.",
             component=await flare.Row(
                 components.show_card_selection(self.players[0], self.players[1], self)
             ),

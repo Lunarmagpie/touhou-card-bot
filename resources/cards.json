@@ -4,5 +4,89 @@
         "value": 1,
         "type": "METAL",
         "special_effect": 0
-    }
+    },
+    "2": {
+        "name": "Reimu Hakurei",
+        "img_name" : "reimu_hakurei",
+        "value": 8,
+        "type": "EARTH",
+        "special_effect": 0
+    },
+    "4": {
+        "name": "Marisa Kirisame",
+        "img_name" : "marisa_kirisame",
+        "value": 7,
+        "type": "FIRE",
+        "special_effect": 0
+    },
+    "12": {
+        "name": "Rumia",
+        "img_name" : "rumia",
+        "value": 2,
+        "type": "FIRE",
+        "special_effect": 0
+    },
+    "13": {
+        "name": "Daiyousei",
+        "img_name" : "daiyousei",
+        "value": 3,
+        "type": "WOOD",
+        "special_effect": 0
+    },
+    "14": {
+        "name": "Cirno",
+        "img_name" : "cirno",
+        "value": 3,
+        "type": "WATER",
+        "special_effect": 4
+    },
+    "17": {
+        "name": "Koakuma",
+        "img_name" : "koakuma",
+        "value": 6,
+        "type": "Fire",
+        "special_effect": 0
+    },
+    "22": {
+        "name": "Lily White",
+        "img_name" : "lily_white",
+        "value": 7,
+        "type": "WATER",
+        "special_effect": 0
+    },
+    "25": {
+        "name": "Lunasa Prismriver",
+        "img_name" : "lunasa_prismriver",
+        "value": 8,
+        "type": "METAL",
+        "special_effect": 1
+    },
+    "29": {
+        "name": "Wriggle Nightbug",
+        "img_name" : "wriggle_nightbug",
+        "value": 2,
+        "type": "EARTH",
+        "special_effect": 0
+    },
+    "30": {
+        "name": "Mystia Lorelei",
+        "img_name" : "mystia_lorelei",
+        "value": 4,
+        "type": "WOOD",
+        "special_effect": 0
+    },
+    "41": {
+        "name": "Nitori Kawashiro",
+        "img_name" : "nitori_kawashiro",
+        "value": 6,
+        "type": "WATER",
+        "special_effect": 8
+    },
+    "58": {
+        "name": "Parsee Mizuhashi",
+        "img_name" : "parsee_mizuhashi",
+        "value": 6,
+        "type": "WATER",
+        "special_effect": 0
+    },
 }
