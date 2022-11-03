@@ -63,8 +63,8 @@ class Game:
 
         time_waited = time.time() - start
 
-        if time_waited < 6:
-            await asyncio.sleep(6 - time_waited)
+        if time_waited < 8:
+            await asyncio.sleep(8 - time_waited)
 
         await self.discord.delete_responses()
 
