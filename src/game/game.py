@@ -44,7 +44,7 @@ class Game:
             player = self.players[i]
 
             content = "\n".join(
-                f"({card.value}) {card.name} - DESCRIPTION"
+                f"({card.value}) {card.name}"
                 for card in map(lambda id: cards.CARDS[id], player.hand)
             )
 
