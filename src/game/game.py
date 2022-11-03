@@ -4,6 +4,7 @@ import asyncio
 from game.discord_game import DiscordGame
 from game.player import Player
 import time
+import flare
 import utils
 
 
@@ -34,19 +35,16 @@ class Game:
         for player in self.players:
             player.clear()
 
-        await self._send_stats()
-
         self.countdown = utils.countdown(21)
+        await self._send_stats()
 
         await asyncio.gather(
             self.discord.respond_to_player(
                 0,
-                content=f"Select your cards: {self.countdown}",
                 component=await components.build_card_buttons(self.players[0], self),
             ),
             self.discord.respond_to_player(
                 1,
-                content=f"Select your cards: {self.countdown}",
                 component=await components.build_card_buttons(self.players[1], self),
             ),
         )
@@ -65,7 +63,14 @@ class Game:
         await self._send_result()
 
     async def _send_stats(self) -> None:
-        await self.discord.respond_global(content="These are some stats.")
+        from game import components
+
+        await self.discord.respond_global(
+            content=f"These are some stats.\n{self.countdown}s Remaining",
+            component=await flare.Row(
+                components.show_card_selection(self.players[0], self.players[1], self)
+            ),
+        )
 
     async def _send_result(self) -> None:
         await self.discord.respond_global(
