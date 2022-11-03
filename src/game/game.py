@@ -56,7 +56,6 @@ class Game:
         timetd_out = await utils.event_or_timout(
             20, *(player.selected_card_event for player in self.players)
         )
-        print(f"{timetd_out=}")
 
         time_waited = time.time() - start
 
