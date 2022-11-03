@@ -20,7 +20,6 @@ async def event_or_timout(timeout: int, *events: asyncio.Event) -> bool:
 
     await asyncio.gather(*(wait_for_event(e) for e in events))
 
-    if timed_out:
-        timer_task.cancel()
+    timer_task.cancel()
 
     return timed_out

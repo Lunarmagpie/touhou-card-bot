@@ -7,13 +7,12 @@ import typing as t
 
 __all__: t.Sequence[str] = ("add_converter",)
 
-_objects: dict[int, Game] = {}
+_objects: t.MutableMapping[int, Game] = weakref.WeakValueDictionary()
 
 # NOTE: Watch out for memory leak.
 class GenericConverter(flare.Converter[t.Any]):
     async def to_str(self, obj: Game) -> str:
         _objects[id(obj)] = obj
-        weakref.finalize(obj, lambda: _objects.pop(id(obj)))
         return str(id(obj))
 
     async def from_str(self, obj: str) -> Game:
