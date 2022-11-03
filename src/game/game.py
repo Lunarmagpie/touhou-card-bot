@@ -3,7 +3,7 @@ import asyncio
 
 from game.discord_game import DiscordGame
 from game.player import Player
-from images.generate import generate,remove_image
+import images
 import cards
 import time
 import flare
@@ -40,7 +40,6 @@ class Game:
         self.countdown = utils.countdown(20)
         await self._send_stats()
 
-        image_names = []
         for i in range(2):
             player = self.players[i]
 
@@ -49,14 +48,11 @@ class Game:
                 for card in map(lambda id: cards.CARDS[id], player.hand)
             )
 
-            image_name = generate(player.hand)
-            image_names.append(image_name)
-
             asyncio.ensure_future(
                 self.discord.respond_to_player(
                     i,
                     content=f"You drew: \n{content}",
-                    attachment=hikari.File(f"./src/images/{image_name}.png"),
+                    attachment=await images.get_hand_image(player.hand),
                     component=await components.build_card_buttons(player, self, len(player.hand)),
                 )
             )
@@ -64,8 +60,6 @@ class Game:
         start = time.time()
 
         await utils.event_or_timout(20, *(player.selected_card_event for player in self.players))
-
-        remove_image(image_names)
 
         time_waited = time.time() - start
 
