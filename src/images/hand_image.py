@@ -10,7 +10,7 @@ __all__: t.Sequence[str] = ("get_hand_image",)
 
 
 async def get_hand_image(cards: list[int]) -> hikari.Bytes:
-    output_img = Image.new("RGBA", (1340, 360), (255, 255, 255, 0))
+    output_img = Image.new("RGBA", (1500, 360), (255, 255, 255, 0))
 
     for i, id in enumerate(cards):
         card_img = Image.open(f"resources/card_png/{CARDS[id].img_name}.png")
@@ -18,7 +18,7 @@ async def get_hand_image(cards: list[int]) -> hikari.Bytes:
             None,
             functools.partial(card_img.load),
         )
-        output_img.paste(card_img, (260 * i, 360 - card_img.height), card_img)
+        output_img.paste(card_img, (260 * i - 15, 360 - card_img.height), card_img)
 
     with io.BytesIO() as b:
         output_img.save(b, format="png")

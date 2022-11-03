@@ -1,6 +1,7 @@
 import flare
 from game.game import Game
 from game.player import Player
+from cards.card import Card
 import asyncio
 import weakref
 import typing as t

@@ -1,4 +1,5 @@
 from __future__ import annotations
+from tokenize import Special
 
 import typing as t
 import enum
@@ -7,7 +8,6 @@ import json
 __all__: t.Sequence[str] = ("SpecialEffectT", "Elements", "Card", "CARDS")
 
 SpecialEffectT = t.NewType("SpecialEffectT", int)
-
 
 class Elements(enum.Enum):
     WOOD = 0
@@ -27,6 +27,20 @@ class Elements(enum.Enum):
 
         return out
 
+icons = {
+    Elements.WOOD : "<:Wood:1037482562001588264>",
+    Elements.FIRE : "<:Fire:1037482558885212240>",
+    Elements.EARTH : "<:Earth:1037482557492703402>",
+    Elements.METAL :  "<:Metal:1037482559925407775>",
+    Elements.WATER : "<:Water:1037482560877502564>"
+}
+
+special_effects = {
+    0 : "This card has no special abilities.",
+    1 : "After this card is played, the value of your next card played will be increased by 2.",
+    4 : "After this card is played, the next winning card will award double the number of seals.",
+    8 : "After this card is played, the next winning water card will award double the number of seals."
+}
 
 class Card(t.NamedTuple):
     number: int
@@ -47,6 +61,12 @@ class Card(t.NamedTuple):
             type=Elements.__dict__[d["type"]],
             special_effect=d["special_effect"],
         )
+
+    def get_type_icon(self) -> str:
+        return icons[self.type]
+
+    def get_special_effect_desc(self) -> str:
+        return special_effects[self.special_effect]
 
 
 with open("resources/cards.json") as f:
