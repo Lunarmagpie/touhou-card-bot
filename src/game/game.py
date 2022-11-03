@@ -53,9 +53,7 @@ class Game:
 
         start = time.time()
 
-        timetd_out = await utils.event_or_timout(
-            20, *(player.selected_card_event for player in self.players)
-        )
+        await utils.event_or_timout(20, *(player.selected_card_event for player in self.players))
 
         time_waited = time.time() - start
 

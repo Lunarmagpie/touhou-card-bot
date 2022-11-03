@@ -17,7 +17,8 @@ async def card_button(ctx: flare.Context, player: Player, game: Game, number: in
     # A `NotFoundError` is expected in that case.
     with contextlib.suppress(hikari.NotFoundError):
         await ctx.edit_response(
-            content=f"You selected card `{number}`. {game.countdown}", flags=hikari.MessageFlag.EPHEMERAL
+            content=f"You selected card `{number}`. {game.countdown}",
+            flags=hikari.MessageFlag.EPHEMERAL,
         )
 
 
