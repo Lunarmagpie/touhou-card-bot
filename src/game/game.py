@@ -3,6 +3,7 @@ import asyncio
 
 from game.discord_game import DiscordGame
 from game.player import Player
+import cards
 import time
 import flare
 import utils
@@ -33,21 +34,26 @@ class Game:
         from game import components
 
         for player in self.players:
-            player.clear()
+            player.on_round_start()
 
         self.countdown = utils.countdown(20)
         await self._send_stats()
 
-        await asyncio.gather(
-            self.discord.respond_to_player(
-                0,
-                component=await components.build_card_buttons(self.players[0], self),
-            ),
-            self.discord.respond_to_player(
-                1,
-                component=await components.build_card_buttons(self.players[1], self),
-            ),
-        )
+        for i in range(2):
+            player = self.players[i]
+
+            content = "\n".join(
+                f"({card.value}) {card.name} - DESCRIPTION"
+                for card in map(lambda id: cards.CARDS[id], player.hand)
+            )
+
+            asyncio.ensure_future(
+                self.discord.respond_to_player(
+                    i,
+                    content=f"You drew: \n{content}",
+                    component=await components.build_card_buttons(player, self, len(player.hand)),
+                )
+            )
 
         start = time.time()
 

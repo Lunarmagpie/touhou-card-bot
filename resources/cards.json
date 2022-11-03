@@ -44,7 +44,7 @@
         "name": "Koakuma",
         "img_name" : "koakuma",
         "value": 6,
-        "type": "Fire",
+        "type": "FIRE",
         "special_effect": 0
     },
     "22": {
