@@ -4,7 +4,6 @@ import asyncio
 from game.discord_game import DiscordGame
 from game.player import Player
 import images
-import cards
 import time
 import flare
 import utils
@@ -38,22 +37,18 @@ class Game:
             player.on_round_start()
 
         self.countdown = utils.countdown(20)
+
         await self._send_stats()
 
         for i in range(2):
             player = self.players[i]
-
-            content = "\n".join(
-                f"({card.value}) {card.name}"
-                for card in map(lambda id: cards.CARDS[id], player.hand)
-            )
 
             asyncio.ensure_future(
                 self.discord.respond_to_player(
                     i,
                     content=(
                         "Select a blurple buttton to pick a card. Select a gray button to check"
-                        "the card's information."
+                        " the card's information."
                     ),
                     attachment=await images.get_hand_image(player.hand),
                     components=await components.build_card_buttons(player, self, len(player.hand)),
@@ -71,8 +66,6 @@ class Game:
 
         await self.discord.delete_responses()
 
-        await self._send_result()
-
     async def _send_stats(self) -> None:
         from game import components
 
@@ -85,10 +78,4 @@ class Game:
             component=await flare.Row(
                 components.show_card_selection(self.players[0], self.players[1], self)
             ),
-        )
-
-    async def _send_result(self) -> None:
-        await self.discord.respond_global(
-            content=f"{self.players[0].user.mention} selected: {self.players[0].selected_card}"
-            f"\n{self.players[1].user.mention} selected: {self.players[1].selected_card}"
         )
