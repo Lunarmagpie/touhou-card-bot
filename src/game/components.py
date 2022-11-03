@@ -13,6 +13,11 @@ async def card_button(ctx: flare.Context, player: Player, game: Game, number: in
     player.selected_card_event.set()
     player.selected_card = number
 
+    # If the interaction is processed after the card selection message is deleted, a
+    # forbidden error would be raised. 
+    with contextlib.suppress(hikari.NotFoundError):
+        # Remove the interaction failed response without changing anything.
+        await ctx.edit_response()
 
 async def build_card_buttons(player: Player, game: Game) -> flare.Row:
     row = flare.Row()
