@@ -1,6 +1,7 @@
 {
     "0": {
         "name": "Cure Peace",
+        "img_name" : "cure_peace",
         "value": 1,
         "type": "METAL",
         "special_effect": 0

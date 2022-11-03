@@ -31,6 +31,7 @@ class Elements(enum.Enum):
 class Card(t.NamedTuple):
     number: int
     name: str
+    img_name: str
     value: t.Literal[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
     type: Elements
     special_effect: SpecialEffectT
@@ -41,6 +42,7 @@ class Card(t.NamedTuple):
         return cls(
             number=index,
             name=d["name"],
+            img_name=d["img_name"],
             value=d["value"],
             type=Elements.__dict__[d["type"]],
             special_effect=d["special_effect"],
