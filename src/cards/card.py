@@ -4,7 +4,7 @@ import typing as t
 import enum
 import json
 
-__all__: t.Sequence[str] = ("SpecialEffectT", "Elements", "Card")
+__all__: t.Sequence[str] = ("SpecialEffectT", "Elements", "Card", "CARDS")
 
 SpecialEffectT = t.NewType("SpecialEffectT", int)
 
@@ -49,8 +49,6 @@ class Card(t.NamedTuple):
 
 with open("resources/cards.json") as f:
     CARDS = {
-        int(index):Card.from_json(int(index), data)
+        int(index): Card.from_json(int(index), data)
         for index, data in t.cast(dict[str, t.Any], json.load(f)).items()
     }
-
-print(CARDS)
