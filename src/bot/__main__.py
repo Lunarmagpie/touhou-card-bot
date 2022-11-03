@@ -1,5 +1,6 @@
 import utils
 import flare
+import cards.card
 
 bot = utils.Bot(utils.CONFIG.token)
 
