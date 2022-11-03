@@ -62,10 +62,12 @@ class Card(t.NamedTuple):
             special_effect=d["special_effect"],
         )
 
-    def get_type_icon(self) -> str:
+    @property
+    def type_icon(self) -> str:
         return icons[self.type]
 
-    def get_special_effect_desc(self) -> str:
+    @property
+    def special_effect_desc(self) -> str:
         return special_effects[self.special_effect]
 
 

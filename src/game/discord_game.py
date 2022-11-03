@@ -11,7 +11,7 @@ class Interaction:
 
     webhook_id: hikari.Snowflake
     token: str
-    last_response: hikari.Snowflake | None = None
+    responses: list[hikari.Snowflake] = dataclasses.field(default_factory=list)
 
 
 @dataclasses.dataclass
@@ -41,11 +41,12 @@ class DiscordGame:
             self._interactions = (self.interactions[0], new)
 
     async def respond_global(self, **kwargs: t.Any) -> None:
-        await self.app.rest.execute_webhook(
+        msg = await self.app.rest.execute_webhook(
             webhook=self.interactions[0].webhook_id,
             token=self.interactions[0].token,
             **kwargs,
         )
+        self.interactions[0].responses.append(msg.id)
 
     async def respond_to_player(
         self,
@@ -59,23 +60,22 @@ class DiscordGame:
             **kwargs,
             flags=hikari.MessageFlag.EPHEMERAL,
         )
-        self.interactions[player].last_response = msg.id
-
-    async def delete_response(self, player: int) -> None:
-        """Delete emphermial responses sent to both players."""
-
-        inter = self.interactions[player]
-
-        if not inter.last_response:
-            return
-        id = inter.last_response
-        inter.last_response = None
-        await self.app.rest.delete_webhook_message(
-            webhook=inter.webhook_id,
-            token=inter.token,
-            message=id,
-        )
+        self.interactions[player].responses.append(msg.id)
 
     async def delete_responses(self) -> None:
         """Delete emphermial responses sent to both players."""
-        await asyncio.gather(self.delete_response(0), self.delete_response(1))
+
+        async def delete_response(id: hikari.Snowflake, player: int) -> None:
+            await self.app.rest.delete_webhook_message(
+                webhook=self.interactions[player].webhook_id,
+                token=self.interactions[player].token,
+                message=id,
+            )
+
+        await asyncio.gather(
+            *(delete_response(id, 0) for id in self.interactions[0].responses),
+            *(delete_response(id, 1) for id in self.interactions[1].responses),
+        )
+
+        self.interactions[0].responses = []
+        self.interactions[1].responses = []

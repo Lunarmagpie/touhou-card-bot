@@ -51,8 +51,10 @@ class Game:
             asyncio.ensure_future(
                 self.discord.respond_to_player(
                     i,
-                    #content=f"You drew: \n{content}",
-                    content="Select a blurple buttton to pick a card. Select a gray button to check the card's information.",
+                    content=(
+                        "Select a blurple buttton to pick a card. Select a gray button to check"
+                        "the card's information."
+                    ),
                     attachment=await images.get_hand_image(player.hand),
                     components=await components.build_card_buttons(player, self, len(player.hand)),
                 )

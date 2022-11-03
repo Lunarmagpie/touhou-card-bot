@@ -21,17 +21,17 @@ async def card_button(ctx: flare.Context, player: Player, game: Game, number: in
         # Remove the interaction failed response without changing anything.
         await ctx.edit_response()
 
+
 @flare.button(label="?", style=hikari.ButtonStyle.SECONDARY)
 async def info_button(ctx: flare.Context, player: Player, game: Game, number: int) -> None:
 
     picked_card = CARDS[player.hand[number]]
 
     await ctx.interaction.create_initial_response(
-        hikari.ResponseType.MESSAGE_CREATE,  # Create a new message as response to this interaction
-        f"**{picked_card.name}** ({picked_card.value} of {picked_card.get_type_icon()})\n*{picked_card.get_special_effect_desc()}*",  # Message content
-        flags=hikari.MessageFlag.EPHEMERAL  # Ephemeral message, only visible to the user who pressed the button
+        hikari.ResponseType.MESSAGE_CREATE,
+        f"**{picked_card.name}** ({picked_card.value} of {picked_card.type_icon})\n*{picked_card.special_effect_desc}*",
+        flags=hikari.MessageFlag.EPHEMERAL,
     )
-        
 
 
 async def build_card_buttons(player: Player, game: Game, card_count: int) -> list[flare.Row]:
@@ -41,7 +41,7 @@ async def build_card_buttons(player: Player, game: Game, card_count: int) -> lis
         rows[0].append(card_button(player, game, i).set_label(str(i + 1)))
         rows[1].append(info_button(player, game, i))
 
-    return await asyncio.gather(*rows)  # type: ignore
+    return await asyncio.gather(*rows)
 
 
 @flare.button(label="Reshow Card Selection", style=hikari.ButtonStyle.SECONDARY)
