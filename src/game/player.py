@@ -1,4 +1,5 @@
 import dataclasses
+from multiprocessing.sharedctypes import Value
 import hikari
 import asyncio
 import random
@@ -51,6 +52,25 @@ class Player:
         if card.type not in self.seals:
             self.seals[card.type] = 0
         self.seals[card.type] += 1
+
+    def output_seals(self) -> str:
+        out = ""
+        seals = self.seals.copy()
+        seals.pop("default") # type: ignore
+
+        while sum(seals.values()) > 0:
+            for index, key in enumerate(seals):
+                if seals[key] > 0:
+                    out += cards.card.icons[key]
+                    seals[key] -= 1
+                else:
+                    out += "<:__:1037952245804826765>"
+            out += "\n"
+
+        if out == "":
+            out += "*no seals*"
+        return out
+
 
     def draw_card(self) -> None:
         if self.deck:

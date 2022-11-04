@@ -29,7 +29,7 @@ async def info_button(ctx: flare.Context, player: Player, game: Game, number: in
 
     await ctx.interaction.create_initial_response(
         hikari.ResponseType.MESSAGE_CREATE,
-        f"**{picked_card.name}** ({picked_card.value} of {picked_card.type_icon})\n*{picked_card.special_effect_desc}*",
+        f"**{picked_card.name}** ({picked_card.value} of {picked_card.type_icon})\n*{picked_card.special_effect_desc}\n{picked_card.get_interactions}*",
         flags=hikari.MessageFlag.EPHEMERAL,
     )
 
