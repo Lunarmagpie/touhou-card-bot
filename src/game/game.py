@@ -6,6 +6,9 @@ from game.player import Player
 import images
 import time
 import flare
+import cards
+import typing as t
+import random
 import utils
 
 
@@ -27,6 +30,8 @@ class Game:
     async def loop(self) -> None:
         """The main game loop"""
 
+        await self._send_stats()
+
         while True:
             await self._round()
 
@@ -35,10 +40,6 @@ class Game:
 
         for player in self.players:
             player.on_round_start()
-
-        self.countdown = utils.countdown(20)
-
-        await self._send_stats()
 
         for i in range(2):
             player = self.players[i]
@@ -64,18 +65,55 @@ class Game:
         if time_waited < 8:
             await asyncio.sleep(8 - time_waited)
 
-        await self.discord.delete_responses()
+        await self.discord.delete_ephermial_responses()
+        await self.discord.delete_global_response()
 
-    async def _send_stats(self) -> None:
+        if round_res := self.get_results():
+            winner, loser = round_res
+            await self._send_stats(
+                content=f"Winner: {winner.user.mention}\nLoser: {loser.user.mention}",
+            )
+        else:
+            await self._send_stats(content="There was a tie")
+
+        await asyncio.sleep(8)
+
+    def get_results(self) -> tuple[Player, Player] | None:
+        # If a player didn't pick a card, choose a card for them.
+        for player in self.players:
+            if not player.selected_card:
+                player.selected_card = player.hand.pop(random.choice(range(len(player.hand))))
+
+        assert self.players[0].selected_card
+        assert self.players[1].selected_card
+
+        res = cards.get_interaction_result(
+            self.players[0].selected_card, self.players[1].selected_card
+        )
+
+        match res:
+            case cards.InteractionResults.P1_WIN:
+                self.players[0].add_seal()
+                return (self.players[0], self.players[1])
+            case cards.InteractionResults.P2_WIN:
+                self.players[1].add_seal()
+                return (self.players[1], self.players[0])
+            case cards.InteractionResults.TIE:
+                return None
+
+    async def _send_stats(self, **kwargs: t.Any) -> None:
         from game import components
 
+        self.countdown = utils.countdown(20)
+
         embed = hikari.Embed(title="Game 1", description=f"Next round {self.countdown}.")
-        embed.add_field(self.players[0].user.username, "score", inline=True)
-        embed.add_field(self.players[1].user.username, "score", inline=True)
+        embed.add_field(self.players[0].user.username, repr(self.players[0].seals), inline=True)
+        embed.add_field(self.players[1].user.username, repr(self.players[1].seals), inline=True)
 
         await self.discord.respond_global(
-            content=embed,
+            embed=embed,
             component=await flare.Row(
                 components.show_card_selection(self.players[0], self.players[1], self)
             ),
+            **kwargs,
         )

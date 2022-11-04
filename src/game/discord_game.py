@@ -11,7 +11,7 @@ class Interaction:
 
     webhook_id: hikari.Snowflake
     token: str
-    responses: list[hikari.Snowflake] = dataclasses.field(default_factory=list)
+    ephermial_responses: list[hikari.Snowflake] = dataclasses.field(default_factory=list)
 
 
 @dataclasses.dataclass
@@ -23,6 +23,7 @@ class DiscordGame:
     app: utils.Bot
 
     _interactions: tuple[Interaction | None, Interaction | None] = (None, None)
+    _global_response: hikari.Snowflake | None = None
 
     @property
     def interactions(self) -> tuple[Interaction, Interaction]:
@@ -46,7 +47,27 @@ class DiscordGame:
             token=self.interactions[0].token,
             **kwargs,
         )
-        self.interactions[0].responses.append(msg.id)
+        self._global_response = msg.id
+
+    async def edit_global(self, **kwargs: t.Any) -> None:
+        if not self._global_response:
+            raise ValueError("No global response has been made yet.")
+        await self.app.rest.edit_webhook_message(
+            webhook=self.interactions[0].webhook_id,
+            token=self.interactions[0].token,
+            message=self._global_response,
+            **kwargs,
+        )
+
+    async def delete_global_response(self) -> None:
+        if not self._global_response:
+            raise ValueError("No global response has been made yet.")
+        await self.app.rest.delete_webhook_message(
+            webhook=self.interactions[0].webhook_id,
+            token=self.interactions[0].token,
+            message=self._global_response,
+        )
+        self._global_response = None
 
     async def respond_to_player(
         self,
@@ -60,9 +81,9 @@ class DiscordGame:
             **kwargs,
             flags=hikari.MessageFlag.EPHEMERAL,
         )
-        self.interactions[player].responses.append(msg.id)
+        self.interactions[player].ephermial_responses.append(msg.id)
 
-    async def delete_responses(self) -> None:
+    async def delete_ephermial_responses(self) -> None:
         """Delete emphermial responses sent to both players."""
 
         async def delete_response(id: hikari.Snowflake, player: int) -> None:
@@ -73,9 +94,9 @@ class DiscordGame:
             )
 
         await asyncio.gather(
-            *(delete_response(id, 0) for id in self.interactions[0].responses),
-            *(delete_response(id, 1) for id in self.interactions[1].responses),
+            *(delete_response(id, 0) for id in self.interactions[0].ephermial_responses),
+            *(delete_response(id, 1) for id in self.interactions[1].ephermial_responses),
         )
 
-        self.interactions[0].responses = []
-        self.interactions[1].responses = []
+        self.interactions[0].ephermial_responses = []
+        self.interactions[1].ephermial_responses = []

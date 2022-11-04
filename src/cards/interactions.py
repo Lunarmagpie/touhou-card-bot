@@ -1,5 +1,5 @@
 import enum
-from cards.card import Card
+from cards.card import Card, CARDS
 import typing as t
 
 __all__: t.Sequence[str] = (
@@ -14,7 +14,16 @@ class InteractionResults(enum.Enum):
     TIE = enum.auto()
 
 
-def interactions(card_1: Card, card_2: Card) -> InteractionResults:
+def get_interaction_result(card_1: Card | int, card_2: Card | int) -> InteractionResults:
+    if isinstance(card_1, int):
+        card_1 = CARDS[card_1]
+    if isinstance(card_2, int):
+        card_2 = CARDS[card_2]
+
+    return _get_interaction_result_inner(card_1, card_2)
+
+
+def _get_interaction_result_inner(card_1: Card, card_2: Card) -> InteractionResults:
     if card_1.type - card_2.type == 2:
         return InteractionResults.P2_WIN
 
