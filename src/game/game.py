@@ -18,7 +18,7 @@ class Game:
         self.players = (Player(players[0]), Player(players[1]))
         self.discord = DiscordGame(app)
         self._countdown: str | None = None
-        self.previous_round_results: tuple[Player, Player] = None # type: ignore
+        self.previous_round_results: tuple[Player, Player] = None  # type: ignore
 
     @property
     def countdown(self) -> str:
@@ -77,7 +77,7 @@ class Game:
                 content=f"Winner: {winner.user.mention}\nLoser: {loser.user.mention}",
             )
         else:
-            self.previous_round_results = None # type: ignore
+            self.previous_round_results = None  # type: ignore
             await self._send_stats(content="There was a tie")
 
         await asyncio.sleep(8)
@@ -110,8 +110,17 @@ class Game:
 
         self.countdown = utils.countdown(20)
 
-        embed = hikari.Embed(title="Game 1", description=format_results(self.players[0],self.players[1],self.previous_round_results))
-        embed.add_field(visuals.format_names(self.players[0].user.username, self.players[1].user.username, 39), f"{visuals.format_seals(self.players[0].output_seals(False),self.players[1].output_seals(True), 18)}{visuals.format_names('', '', 39)}", inline=False)
+        embed = hikari.Embed(
+            title="Game 1",
+            description=format_results(
+                self.players[0], self.players[1], self.previous_round_results
+            ),
+        )
+        embed.add_field(
+            visuals.format_names(self.players[0].user.username, self.players[1].user.username, 39),
+            f"{visuals.format_seals(self.players[0].output_seals(False),self.players[1].output_seals(True), 18)}{visuals.format_names('', '', 39)}",
+            inline=False,
+        )
         embed.add_field("<:__:1037952245804826765>", f"Next round {self.countdown}")
 
         await self.discord.respond_global(
