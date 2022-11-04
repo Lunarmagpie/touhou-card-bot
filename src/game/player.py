@@ -27,6 +27,9 @@ class Player:
 
     def on_round_start(self) -> None:
         self.selected_card_event.clear()
+
+        if self.selected_card:
+            self.hand.remove(self.selected_card)
         self.selected_card = None
 
         if len(self.hand) < 5:
@@ -48,9 +51,6 @@ class Player:
         if card.type not in self.seals:
             self.seals[card.type] = 0
         self.seals[card.type] += 1
-
-    def pop_from_hand(self, index: int) -> int:
-        return self.hand.pop(index)
 
     def draw_card(self) -> None:
         if self.deck:

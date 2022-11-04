@@ -13,7 +13,7 @@ import asyncio
 @flare.button()
 async def card_button(ctx: flare.Context, player: Player, game: Game, number: int) -> None:
     player.selected_card_event.set()
-    player.selected_card = player.pop_from_hand(number)
+    player.selected_card = player.hand[number]
 
     # If the interaction is processed after the card selection message is deleted, a
     # forbidden error would be raised.
