@@ -4,6 +4,7 @@ from tokenize import Special
 import typing as t
 import enum
 import json
+from xml.dom.minidom import Element
 
 __all__: t.Sequence[str] = ("SpecialEffectT", "Elements", "Card", "CARDS")
 
@@ -26,6 +27,14 @@ class Elements(enum.Enum):
             return out + 5
 
         return out
+
+    def __add__(self, o: int) -> Elements:
+        out: int = self.value + o
+
+        if out > 4:
+            out = out - 5
+
+        return Elements(out)
 
 icons = {
     Elements.WOOD : "<:Wood:1037482562001588264>",
@@ -69,6 +78,14 @@ class Card(t.NamedTuple):
     @property
     def special_effect_desc(self) -> str:
         return special_effects[self.special_effect]
+
+    @property
+    def get_interactions(self) -> str:
+        return f"""
+{icons[self.type]} always overcomes {icons[self.type + 2]}
+{icons[self.type + 3]} always overcomes **{icons[self.type]}
+For {icons[self.type]}, {icons[self.type + 1]}, and {icons[self.type + 4]}, the card with the highest number wins.
+        """
 
 
 with open("resources/cards.json") as f:
