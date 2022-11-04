@@ -64,7 +64,7 @@ class Player:
                     sout += cards.card.icons[key]
                     seals[key] -= 1
                 else:
-                    sout += "　   "
+                    sout += "　  "
             out.append(sout)
 
         if len(out) == 0:

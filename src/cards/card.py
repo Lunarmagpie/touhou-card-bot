@@ -82,9 +82,9 @@ class Card(t.NamedTuple):
     @property
     def get_interactions(self) -> str:
         return f"""
-{icons[self.type]} always overcomes {icons[self.type + 2]}
-{icons[self.type + 3]} always overcomes **{icons[self.type]}
-For {icons[self.type]}, {icons[self.type + 1]}, and {icons[self.type + 4]}, the card with the highest number wins.
+{icons[self.type]} always overcomes {icons[self.type + 2]} and {icons[self.type + 4]}
+{icons[self.type + 3]} and {icons[self.type + 1]} always overcome {icons[self.type]}
+Against a card of the same type, the card with the highest number wins.
         """
 
 
