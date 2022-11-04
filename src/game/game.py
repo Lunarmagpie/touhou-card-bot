@@ -107,7 +107,7 @@ class Game:
         self.countdown = utils.countdown(20)
 
         embed = hikari.Embed(title="Game 1", description="results go here")
-        embed.add_field(visuals.format_names(self.players[0].user.username, self.players[1].user.username, 40), f"{visuals.format_seals(self.players[0].output_seals(False),self.players[1].output_seals(True), 17)}\n{visuals.format_names('', '', 40)}", inline=False)
+        embed.add_field(visuals.format_names(self.players[0].user.username, self.players[1].user.username, 40), f"{visuals.format_seals(self.players[0].output_seals(False),self.players[1].output_seals(True), 17)}{visuals.format_names('', '', 40)}", inline=False)
         embed.add_field("<:__:1037952245804826765>", f"Next round {self.countdown}")
 
         await self.discord.respond_global(
