@@ -53,22 +53,25 @@ class Player:
             self.seals[card.type] = 0
         self.seals[card.type] += 1
 
-    def output_seals(self) -> str:
-        out = ""
+    def output_seals(self, reverse: bool) -> list[str]:
+        out = []
         seals = self.seals.copy()
+        if reverse == True:
+            seals = dict(reversed(list(seals.items())))
         seals.pop("default") # type: ignore
 
         while sum(seals.values()) > 0:
+            sout = ""
             for index, key in enumerate(seals):
                 if seals[key] > 0:
-                    out += cards.card.icons[key]
+                    sout += cards.card.icons[key]
                     seals[key] -= 1
                 else:
-                    out += "<:__:1037952245804826765>"
-            out += "\n"
+                    sout += "　   "
+            out.append(sout)
 
-        if out == "":
-            out += "*no seals*"
+        if len(out) == 0:
+            out.append("<:__:1037952245804826765>")
         return out
 
 

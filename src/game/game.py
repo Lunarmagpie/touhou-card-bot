@@ -3,7 +3,7 @@ import asyncio
 
 from game.discord_game import DiscordGame
 from game.player import Player
-import images
+import visuals
 import time
 import flare
 import cards
@@ -51,7 +51,7 @@ class Game:
                         "Select a blurple buttton to pick a card. Select a gray button to check"
                         " the card's information."
                     ),
-                    attachment=await images.get_hand_image(player.hand),
+                    attachment=await visuals.get_hand_image(player.hand),
                     components=await components.build_card_buttons(player, self, len(player.hand)),
                 )
             )
@@ -107,9 +107,8 @@ class Game:
         self.countdown = utils.countdown(20)
 
         embed = hikari.Embed(title="Game 1", description="results go here")
-        embed.add_field(self.players[0].user.username, self.players[0].output_seals(), inline=True)
-        embed.add_field(self.players[1].user.username, self.players[1].output_seals(), inline=True)
-        embed.add_field("<:__:1037952245804826765>", f"Next round {self.countdown}.")
+        embed.add_field(visuals.format_names(self.players[0].user.username, self.players[1].user.username, 40), f"{visuals.format_seals(self.players[0].output_seals(False),self.players[1].output_seals(True), 17)}\n{visuals.format_names('', '', 40)}", inline=False)
+        embed.add_field("<:__:1037952245804826765>", f"Next round {self.countdown}")
 
         await self.discord.respond_global(
             embed=embed,
