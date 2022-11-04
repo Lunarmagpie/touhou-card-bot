@@ -5,7 +5,6 @@ import random
 import functools
 import copy
 import cards
-import collections
 
 
 @dataclasses.dataclass
@@ -21,9 +20,7 @@ class Player:
     selected_card_event: asyncio.Event = dataclasses.field(default_factory=asyncio.Event)
 
     # Score Related
-    seals: dict[cards.Elements, int] = dataclasses.field(
-        default_factory=functools.partial(collections.defaultdict, default=0)  # type: ignore
-    )
+    seals: dict[cards.Elements, int] = dataclasses.field(default_factory=dict)
 
     def on_round_start(self) -> None:
         self.selected_card_event.clear()

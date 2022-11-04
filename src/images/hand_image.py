@@ -22,4 +22,5 @@ async def get_hand_image(cards: list[int]) -> hikari.Bytes:
 
     with io.BytesIO() as b:
         output_img.save(b, format="png")
-        return hikari.Bytes(b.getvalue(), "card_display.png")
+        b.seek(0)
+        return hikari.Bytes(b, "card_display.png")
