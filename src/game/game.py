@@ -50,7 +50,7 @@ class Game:
                 self.discord.respond_to_player(
                     i,
                     content=(
-                        "Select a blurple buttton to pick a card. Select a gray button to check"
+                        "Select a blurple button to pick a card. Select a gray button to check"
                         " the card's information."
                     ),
                     attachment=await visuals.get_hand_image(player.hand),
