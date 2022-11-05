@@ -5,12 +5,10 @@ import copy
 import dataclasses
 import functools
 import random
-import typing as t
 
 import hikari
 
-if t.TYPE_CHECKING:
-    import cards
+import cards
 
 
 @dataclasses.dataclass
@@ -45,6 +43,11 @@ class Player:
         self.deck[:5] = []
 
         self.hand.extend(first_5)
+
+    @property
+    def selected_card_object(self) -> cards.Card:
+        assert self.selected_card
+        return cards.CARDS[self.selected_card]
 
     def add_seal(self) -> None:
         """Add a seal for the player's currently selected card."""
