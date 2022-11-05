@@ -70,8 +70,6 @@ class Game:
         await self.discord.delete_ephermial_responses()
         await self.discord.delete_global_response()
 
-        assert self.previous_round_results
-
         if round_res := self.get_results():
             self.previous_round_results = round_res
             winner, loser = round_res
@@ -116,8 +114,6 @@ class Game:
             self.players[0].user.username, self.players[1].user.username, length=40
         )
         player_seals = visuals.format_seals(self.players[0].seals, self.players[1].seals, length=17)
-
-        assert self.previous_round_results
 
         embed = hikari.Embed(
             title="Game 1",
