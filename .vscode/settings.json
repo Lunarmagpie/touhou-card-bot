@@ -1,6 +1,0 @@
-{
-    "python.linting.mypyEnabled": true,
-    "python.linting.enabled": true,
-    "python.pythonPath": "venv/bin/python",
-    "python.linting.prospectorEnabled": false
-}
