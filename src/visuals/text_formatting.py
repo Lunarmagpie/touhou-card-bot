@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import typing as t
 
-from game.player import Player
 from visuals.emoji import Emoji
 
 if t.TYPE_CHECKING:
     import cards
+    from game.player import Player
 
 __all__: t.Sequence[str] = ("format_names", "format_seals", "format_results")
 
