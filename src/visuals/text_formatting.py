@@ -1,17 +1,19 @@
 import typing as t
 from game.player import Player
-from cards.card import Card, CARDS, Elements
+from cards.card import CARDS
 
-__all__: t.Sequence[str] = ("format_names","format_seals","format_results")
+__all__: t.Sequence[str] = ("format_names", "format_seals", "format_results")
+
 
 def format_names(player_1: str, player_2: str, length: int) -> str:
-    length -= (len(player_1) + len(player_2))
+    length -= len(player_1) + len(player_2)
     return f"`{player_1 + (' ' * length) + player_2}`"
+
 
 def format_seals(player_1_seals: list[str], player_2_seals: list[str], length: int) -> str:
     out = ""
     offset_number = len(player_1_seals[0].split("<")) + len(player_2_seals[0].split("<"))
-    for i in range(0,3):
+    for i in range(0, 3):
         if i < len(player_1_seals):
             out += player_1_seals[i]
         else:
@@ -23,6 +25,7 @@ def format_seals(player_1_seals: list[str], player_2_seals: list[str], length: i
             out += player_2_seals[i]
         out += "\n"
     return out
+
 
 def format_results(p1: Player, p2: Player, results: tuple[Player, Player]) -> str:
     out = ""

@@ -55,7 +55,7 @@ class Player:
         seals = self.seals.copy()
         if reverse == True:
             seals = dict(reversed(list(seals.items())))
-        seals.pop("default") # type: ignore
+        seals.pop("default")  # type: ignore
 
         while sum(seals.values()) > 0:
             sout = ""
@@ -70,7 +70,6 @@ class Player:
         if len(out) == 0:
             out.append("<:__:1037952245804826765>")
         return out
-
 
     def draw_card(self) -> None:
         if self.deck:

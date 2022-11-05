@@ -10,6 +10,7 @@ __all__: t.Sequence[str] = ("SpecialEffectT", "Elements", "Card", "CARDS")
 
 SpecialEffectT = t.NewType("SpecialEffectT", int)
 
+
 class Elements(enum.Enum):
     WOOD = 0
     FIRE = 1
@@ -36,20 +37,22 @@ class Elements(enum.Enum):
 
         return Elements(out)
 
+
 icons = {
-    Elements.WOOD : "<:Wood:1037482562001588264>",
-    Elements.FIRE : "<:Fire:1037482558885212240>",
-    Elements.EARTH : "<:Earth:1037482557492703402>",
-    Elements.METAL :  "<:Metal:1037482559925407775>",
-    Elements.WATER : "<:Water:1037482560877502564>"
+    Elements.WOOD: "<:Wood:1037482562001588264>",
+    Elements.FIRE: "<:Fire:1037482558885212240>",
+    Elements.EARTH: "<:Earth:1037482557492703402>",
+    Elements.METAL: "<:Metal:1037482559925407775>",
+    Elements.WATER: "<:Water:1037482560877502564>",
 }
 
 special_effects = {
-    0 : "This card has no special abilities.",
-    1 : "After this card is played, the value of your next card played will be increased by 2.",
-    4 : "After this card is played, the next winning card will award double the number of seals.",
-    8 : "After this card is played, the next winning water card will award double the number of seals."
+    0: "This card has no special abilities.",
+    1: "After this card is played, the value of your next card played will be increased by 2.",
+    4: "After this card is played, the next winning card will award double the number of seals.",
+    8: "After this card is played, the next winning water card will award double the number of seals.",
 }
+
 
 class Card(t.NamedTuple):
     number: int
