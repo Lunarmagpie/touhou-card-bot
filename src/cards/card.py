@@ -91,8 +91,7 @@ class Card(t.NamedTuple):
         return (
             f"{icons[self.type]} always overcomes {icons[self.type + 2]}"
             f"\n{icons[self.type + 3]} always overcomes **{icons[self.type]}"
-            f"\nFor {icons[self.type]}, {icons[self.type + 1]}, and {icons[self.type + 4]}"
-            ",the card with the highest number wins."
+            f"\nAgainst a card of the same type, the card with the highest number wins."
         )
 
 

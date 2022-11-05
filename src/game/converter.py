@@ -4,7 +4,6 @@ import weakref
 
 import flare
 
-from cards.card import Card
 from game.game import Game
 from game.player import Player
 

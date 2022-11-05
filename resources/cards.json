@@ -13,12 +13,68 @@
         "type": "EARTH",
         "special_effect": 0
     },
+    "3": {
+        "name": "Reimu Hakurei SR",
+        "img_name" : "reimu_hakurei_sr",
+        "value": 13,
+        "type": "EARTH",
+        "special_effect": 0
+    },
     "4": {
+        "name": "Marisa Kirisame SR",
+        "img_name" : "marisa_kirisame_sr",
+        "value": 13,
+        "type": "FIRE",
+        "special_effect": 0
+    },
+    "5": {
         "name": "Marisa Kirisame",
         "img_name" : "marisa_kirisame",
         "value": 7,
         "type": "FIRE",
         "special_effect": 0
+    },
+    "6": {
+        "name": "Youmu Konpaku",
+        "img_name" : "youmu_konpaku",
+        "value": 10,
+        "type": "WOOD",
+        "special_effect": 18
+    },
+    "7": {
+        "name": "Youmu Konpaku SR",
+        "img_name" : "youmu_konpaku_sr",
+        "value": 12,
+        "type": "WOOD",
+        "special_effect": 18
+    },
+    "8": {
+        "name": "Sakuya Izayoi",
+        "img_name" : "sakuya_izayoi",
+        "value": 12,
+        "type": "METAL",
+        "special_effect": 19
+    },
+    "9": {
+        "name": "Flandre Scarlet",
+        "img_name" : "flandre_scarlet",
+        "value": 10,
+        "type": "FIRE",
+        "special_effect": 3
+    },
+    "10": {
+        "name": "Koishi Komeiji",
+        "img_name" : "koishi_komeiji",
+        "value": 12,
+        "type": "EARTH",
+        "special_effect": 0
+    },
+    "11": {
+        "name": "Remilia Scarlet",
+        "img_name" : "remilia_scarlet",
+        "value": 10,
+        "type": "WATER",
+        "special_effect": 3
     },
     "12": {
         "name": "Rumia",
@@ -37,9 +93,16 @@
     "14": {
         "name": "Cirno",
         "img_name" : "cirno",
-        "value": 3,
+        "value": 4,
         "type": "WATER",
         "special_effect": 4
+    },
+    "15": {
+        "name": "Tanned Cirno",
+        "img_name" : "tanned_cirno",
+        "value": 11,
+        "type": "WATER",
+        "special_effect": 3
     },
     "17": {
         "name": "Koakuma",
@@ -47,6 +110,20 @@
         "value": 6,
         "type": "FIRE",
         "special_effect": 0
+    },
+    "18": {
+        "name": "Patchouli Knowledge",
+        "img_name" : "patchouli_knowledge",
+        "value": 8,
+        "type": "METAL",
+        "special_effect": 0
+    },
+    "21": {
+        "name": "Alice Margatroid",
+        "img_name" : "alice_margatroid",
+        "value": 6,
+        "type": "WOOD",
+        "special_effect": 9
     },
     "22": {
         "name": "Lily White",
@@ -82,6 +159,20 @@
         "value": 6,
         "type": "WATER",
         "special_effect": 8
+    },
+    "43": {
+        "name": "Mononobe no Futo",
+        "img_name" : "mononobe_no_futo",
+        "value": 10,
+        "type": "WATER",
+        "special_effect": 20
+    },
+    "52": {
+        "name": "Remilia Scarlet SR",
+        "img_name" : "remilia_scarlet_sr",
+        "value": 12,
+        "type": "WATER",
+        "special_effect": 3
     },
     "58": {
         "name": "Parsee Mizuhashi",

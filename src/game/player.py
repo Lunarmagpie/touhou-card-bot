@@ -1,12 +1,16 @@
+from __future__ import annotations
+
 import asyncio
 import copy
 import dataclasses
 import functools
 import random
+import typing as t
 
 import hikari
 
-import cards
+if t.TYPE_CHECKING:
+    import cards
 
 
 @dataclasses.dataclass
