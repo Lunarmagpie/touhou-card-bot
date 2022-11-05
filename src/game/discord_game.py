@@ -1,7 +1,9 @@
-import hikari
+import asyncio
 import dataclasses
 import typing as t
-import asyncio
+
+import hikari
+
 import utils
 
 

@@ -1,10 +1,11 @@
-import dataclasses
-from multiprocessing.sharedctypes import Value
-import hikari
 import asyncio
-import random
-import functools
 import copy
+import dataclasses
+import functools
+import random
+
+import hikari
+
 import cards
 
 
@@ -49,28 +50,6 @@ class Player:
         if card.type not in self.seals:
             self.seals[card.type] = 0
         self.seals[card.type] += 1
-
-    def output_seals(self, reverse: bool) -> list[str]:
-        out = []
-        seals = self.seals.copy()
-        if reverse == True:
-            seals = dict(reversed(list(seals.items())))
-        seals.pop("default") # type: ignore
-
-        while sum(seals.values()) > 0:
-            sout = ""
-            for index, key in enumerate(seals):
-                if seals[key] > 0:
-                    sout += cards.card.icons[key]
-                    seals[key] -= 1
-                else:
-                    sout += "　   "
-            out.append(sout)
-
-        if len(out) == 0:
-            out.append("<:__:1037952245804826765>")
-        return out
-
 
     def draw_card(self) -> None:
         if self.deck:

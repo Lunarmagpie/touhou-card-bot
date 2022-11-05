@@ -1,9 +1,10 @@
-import utils
-import flare
-import crescent
-import hikari
 import asyncio
 
+import crescent
+import flare
+import hikari
+
+import utils
 from game import Game
 
 plugin = utils.Plugin()

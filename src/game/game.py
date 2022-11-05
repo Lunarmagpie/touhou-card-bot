@@ -1,15 +1,16 @@
-import hikari
 import asyncio
+import random
+import time
+import typing as t
 
+import flare
+import hikari
+
+import cards
+import utils
+import visuals
 from game.discord_game import DiscordGame
 from game.player import Player
-import visuals
-import time
-import flare
-import cards
-import typing as t
-import random
-import utils
 
 
 class Game:
@@ -106,9 +107,18 @@ class Game:
 
         self.countdown = utils.countdown(20)
 
+        player_names = visuals.format_names(
+            self.players[0].user.username, self.players[1].user.username, length=40
+        )
+        player_seals = visuals.format_seals(self.players[0].seals, self.players[1].seals, length=17)
+
         embed = hikari.Embed(title="Game 1", description="results go here")
-        embed.add_field(visuals.format_names(self.players[0].user.username, self.players[1].user.username, 40), f"{visuals.format_seals(self.players[0].output_seals(False),self.players[1].output_seals(True), 17)}{visuals.format_names('', '', 40)}", inline=False)
-        embed.add_field("<:__:1037952245804826765>", f"Next round {self.countdown}")
+        embed.add_field(
+            player_names,
+            player_seals,
+            inline=False,
+        )
+        embed.add_field(str(visuals.Emoji.BLANK), f"Next round {self.countdown}")
 
         await self.discord.respond_global(
             embed=embed,

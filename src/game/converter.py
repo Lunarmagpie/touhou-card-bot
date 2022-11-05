@@ -1,10 +1,12 @@
+import asyncio
+import typing as t
+import weakref
+
 import flare
+
+from cards.card import Card
 from game.game import Game
 from game.player import Player
-from cards.card import Card
-import asyncio
-import weakref
-import typing as t
 
 __all__: t.Sequence[str] = ("add_converter",)
 

@@ -1,6 +1,7 @@
 import enum
-from cards.card import Card, CARDS
 import typing as t
+
+from cards.card import CARDS, Card
 
 __all__: t.Sequence[str] = (
     "InteractionResults",

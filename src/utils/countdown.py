@@ -1,6 +1,6 @@
+import math
 import time
 import typing as t
-import math
 
 __all__: t.Sequence[str] = ("countdown",)
 

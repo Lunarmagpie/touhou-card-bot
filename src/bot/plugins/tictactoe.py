@@ -2,12 +2,12 @@ import asyncio
 import enum
 import typing as t
 
+import crescent
+import flare
 import hikari
 import hikari.traits
-import crescent
-import utils
-import flare
 
+import utils
 
 plugin = utils.Plugin()
 

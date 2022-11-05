@@ -1,14 +1,15 @@
 from __future__ import annotations
-from tokenize import Special
 
-import typing as t
 import enum
 import json
-from xml.dom.minidom import Element
+import typing as t
+
+import visuals
 
 __all__: t.Sequence[str] = ("SpecialEffectT", "Elements", "Card", "CARDS")
 
 SpecialEffectT = t.NewType("SpecialEffectT", int)
+
 
 class Elements(enum.Enum):
     WOOD = 0
@@ -36,20 +37,26 @@ class Elements(enum.Enum):
 
         return Elements(out)
 
+    @property
+    def icon(self) -> visuals.Emoji:
+        return icons[self]
+
+
 icons = {
-    Elements.WOOD : "<:Wood:1037482562001588264>",
-    Elements.FIRE : "<:Fire:1037482558885212240>",
-    Elements.EARTH : "<:Earth:1037482557492703402>",
-    Elements.METAL :  "<:Metal:1037482559925407775>",
-    Elements.WATER : "<:Water:1037482560877502564>"
+    Elements.WOOD: visuals.Emoji.WOOD,
+    Elements.FIRE: visuals.Emoji.FIRE,
+    Elements.EARTH: visuals.Emoji.EARTH,
+    Elements.METAL: visuals.Emoji.METAL,
+    Elements.WATER: visuals.Emoji.WATER,
 }
 
 special_effects = {
-    0 : "This card has no special abilities.",
-    1 : "After this card is played, the value of your next card played will be increased by 2.",
-    4 : "After this card is played, the next winning card will award double the number of seals.",
-    8 : "After this card is played, the next winning water card will award double the number of seals."
+    0: "This card has no special abilities.",
+    1: "After this card is played, the value of your next card played will be increased by 2.",
+    4: "After this card is played, the next winning card will award double the number of seals.",
+    8: "After this card is played, the next winning water card will award double the number of seals.",
 }
+
 
 class Card(t.NamedTuple):
     number: int
@@ -72,7 +79,7 @@ class Card(t.NamedTuple):
         )
 
     @property
-    def type_icon(self) -> str:
+    def type_icon(self) -> visuals.Emoji:
         return icons[self.type]
 
     @property
@@ -81,11 +88,12 @@ class Card(t.NamedTuple):
 
     @property
     def get_interactions(self) -> str:
-        return f"""
-{icons[self.type]} always overcomes {icons[self.type + 2]}
-{icons[self.type + 3]} always overcomes **{icons[self.type]}
-For {icons[self.type]}, {icons[self.type + 1]}, and {icons[self.type + 4]}, the card with the highest number wins.
-        """
+        return (
+            f"{icons[self.type]} always overcomes {icons[self.type + 2]}"
+            f"\n{icons[self.type + 3]} always overcomes **{icons[self.type]}"
+            f"\nFor {icons[self.type]}, {icons[self.type + 1]}, and {icons[self.type + 4]}"
+            ",the card with the highest number wins."
+        )
 
 
 with open("resources/cards.json") as f:

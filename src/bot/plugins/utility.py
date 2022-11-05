@@ -1,5 +1,6 @@
-import utils
 import crescent
+
+import utils
 
 plugin = utils.Plugin()
 
