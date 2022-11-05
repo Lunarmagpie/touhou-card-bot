@@ -48,7 +48,7 @@ def _seals_text(seals: dict[cards.Elements, int], *, reverse: bool) -> list[str]
     out = []
     seals = seals.copy()
 
-    if reverse == True:
+    if reverse:
         seals = dict(reversed(list(seals.items())))
 
     while sum(seals.values()) > 0:
@@ -71,12 +71,21 @@ def format_results(p1: Player, p2: Player, results: tuple[Player, Player] | None
     if type(p1.selected_card) == int and type(p2.selected_card) == int:
         c1 = p1.selected_card_object
         c2 = p2.selected_card_object
-        out = f"{p1.user.mention} played **{c1.name} {c1.type_icon}{c1.value}**.\n {p2.user.mention} played **{c2.name} {c2.type_icon}{c2.value}**.\n"
+        out = (
+            f"{p1.user.mention} played **{c1.name} {c1.type_icon}{c1.value}**."
+            f"\n {p2.user.mention} played **{c2.name} {c2.type_icon}{c2.value}**.\n"
+        )
     if results:
         if c1.type != c2.type:
-            out += f"The winner is {results[0].user.mention}, because {results[0].user.mention} played a card of a winning element."
+            out += (
+                f"The winner is {results[0].user.mention}, because {results[0].user.mention}"
+                " played a card of a winning element."
+            )
         else:
-            out += f"The winner is {results[0].user.mention}, because {results[0].user.mention} played a card with a higher number."
+            out += (
+                f"The winner is {results[0].user.mention}, because {results[0].user.mention}"
+                " played a card with a higher number."
+            )
     else:
         out = "Round 1. No results yet."
 

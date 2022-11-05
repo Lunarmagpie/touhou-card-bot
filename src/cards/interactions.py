@@ -5,7 +5,7 @@ from cards.card import CARDS, Card
 
 __all__: t.Sequence[str] = (
     "InteractionResults",
-    "interactions",
+    "get_interaction_result",
 )
 
 
