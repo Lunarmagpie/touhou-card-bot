@@ -67,10 +67,12 @@ def _seals_text(seals: dict[cards.Elements, int], *, reverse: bool) -> list[str]
 
 
 def format_results(p1: Player, p2: Player, results: tuple[Player, Player]) -> str:
+    import cards
+
     out = ""
     if type(p1.selected_card) == int and type(p2.selected_card) == int:
-        c1 = CARDS[p1.selected_card]
-        c2 = CARDS[p2.selected_card]
+        c1 = cards.CARDS[p1.selected_card]
+        c2 = cards.CARDS[p2.selected_card]
         out = f"{p1.user.mention} played **{c1.name} {c1.type_icon}{c1.value}**.\n {p2.user.mention} played **{c2.name} {c2.type_icon}{c2.value}**.\n"
     if results != None:
         if c1.type != c2.type:
