@@ -18,7 +18,7 @@ class Game:
         self.players = (Player(players[0]), Player(players[1]))
         self.discord = DiscordGame(app)
         self._countdown: str | None = None
-        self.previous_round_results: tuple[Player, Player] = None  # type: ignore
+        self.previous_round_results: tuple[Player, Player] | None = None
 
     @property
     def countdown(self) -> str:
@@ -70,6 +70,8 @@ class Game:
         await self.discord.delete_ephermial_responses()
         await self.discord.delete_global_response()
 
+        assert self.previous_round_results
+
         if round_res := self.get_results():
             self.previous_round_results = round_res
             winner, loser = round_res
@@ -77,7 +79,7 @@ class Game:
                 content=f"Winner: {winner.user.mention}\nLoser: {loser.user.mention}",
             )
         else:
-            self.previous_round_results = None  # type: ignore
+            self.previous_round_results = None
             await self._send_stats(content="There was a tie")
 
         await asyncio.sleep(8)
@@ -114,6 +116,8 @@ class Game:
             self.players[0].user.username, self.players[1].user.username, length=40
         )
         player_seals = visuals.format_seals(self.players[0].seals, self.players[1].seals, length=17)
+
+        assert self.previous_round_results
 
         embed = hikari.Embed(
             title="Game 1",
