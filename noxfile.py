@@ -42,5 +42,5 @@ def lint(session: nox.Session) -> None:
 
 
 @pip_session(".")
-def mypy(session: nox.Session) -> None:
-    session.run("mypy", *SCRIPT_PATHS)
+def pyright(session: nox.Session) -> None:
+    session.run("pyright")
