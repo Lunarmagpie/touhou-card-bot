@@ -16,5 +16,5 @@ async def ping(ctx: utils.Context) -> None:
 @crescent.command(description="View a card, based on the image name")
 async def viewcard(ctx: utils.Context, img_name: str) -> None:
     await ctx.respond(
-        f"Requested card", attachment=hikari.File(f"resources/card_png/{img_name}.png")
+        "Requested card", attachment=hikari.File(f"resources/card_png/{img_name}.png")
     )

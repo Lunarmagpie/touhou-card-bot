@@ -11,6 +11,7 @@ __all__: t.Sequence[str] = ("add_converter",)
 
 _objects: t.MutableMapping[int, Game] = weakref.WeakValueDictionary()
 
+
 # NOTE: Watch out for memory leak.
 class GenericConverter(flare.Converter[t.Any]):
     async def to_str(self, obj: Game) -> str:

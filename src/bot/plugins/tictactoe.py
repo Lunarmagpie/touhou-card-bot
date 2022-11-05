@@ -117,7 +117,7 @@ class TicTacToe(flare.Button, label=" "):
             content = f"{self.player_2.mention} wins!"
         else:
             await ctx.edit_response(
-                f"Its a tie!",
+                "Its a tie!",
                 components=await asyncio.gather(*rows),
             )
             return
