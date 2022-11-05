@@ -2,21 +2,20 @@ name: ci
 on: [push, pull_request]
 jobs:
   typecheck:
-    name: typechecking
+    name: typecheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.10.6"
+          python-version: "3.10"
           architecture: "x64"
-      - name: Setup Poetry
-        uses: abatilo/actions-poetry@v2.1.3
       - name: run nox
         run: |
-          poetry install
-          poetry run nox -s mypy
+          pip install nox
+          nox -s mypy
+
   lint:
     name: lint
     runs-on: ubuntu-latest
