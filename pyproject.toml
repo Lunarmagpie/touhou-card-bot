@@ -28,4 +28,3 @@ target-version = ['py311']
 
 [tool.mypy]
 strict = true
-version = "3.10"
