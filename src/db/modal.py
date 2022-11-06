@@ -17,8 +17,8 @@ class BaseModal:
 
 @dataclasses.dataclass
 class PlayerModal(BaseModal):
-    decks: list[list[int]]
+    decks: dict[int, list[int]]
 
     @classmethod
     def default(cls) -> PlayerModal:
-        return cls(decks=[[]])
+        return cls(decks={})
