@@ -1,6 +1,6 @@
+import asyncio
 import contextlib
 import typing as t
-import asyncio
 
 T = t.TypeVar("T")
 Self = t.TypeVar("Self", bound="TaskGroup")
