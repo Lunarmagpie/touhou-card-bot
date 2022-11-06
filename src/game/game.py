@@ -43,18 +43,39 @@ class Game:
         for player in self.players:
             player.on_round_start()
 
-        for i in range(2):
-            player = self.players[i]
+        async with utils.TaskGroup() as tg:
+            player_1 = self.players[0]
+            player_1_hand = tg.create_task(visuals.get_hand_image(player_1.hand))
+            player_1_buttons = tg.create_task(
+                components.build_card_buttons(player_1, self, len(player_1.hand))
+            )
 
-            asyncio.ensure_future(
+            player_2 = self.players[1]
+            player_2_hand = tg.create_task(visuals.get_hand_image(player_2.hand))
+            player_2_buttons = tg.create_task(
+                components.build_card_buttons(player_2, self, len(player_2.hand))
+            )
+
+        content = (
+            "Select a blurple button to pick a card. Select a gray button to check"
+            " the card's information."
+        )
+
+        async with utils.TaskGroup() as tg:
+            tg.create_task(
                 self.discord.respond_to_player(
-                    i,
-                    content=(
-                        "Select a blurple button to pick a card. Select a gray button to check"
-                        " the card's information."
-                    ),
-                    attachment=await visuals.get_hand_image(player.hand),
-                    components=await components.build_card_buttons(player, self, len(player.hand)),
+                    0,
+                    content=content,
+                    attachment=player_1_hand.result(),
+                    components=player_1_buttons.result(),
+                )
+            )
+            tg.create_task(
+                self.discord.respond_to_player(
+                    1,
+                    content=content,
+                    attachment=player_2_hand.result(),
+                    components=player_2_buttons.result(),
                 )
             )
 
