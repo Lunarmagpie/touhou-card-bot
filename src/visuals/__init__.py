@@ -10,4 +10,5 @@ __all__: t.Sequence[str] = (
     "format_seals",
     "Emoji",
     "format_results",
+    "get_cards_array_image"
 )
