@@ -1,4 +1,5 @@
 from __future__ import annotations
+from multiprocessing.sharedctypes import Value
 
 import typing as t
 
@@ -81,10 +82,14 @@ def format_results(p1: Player, p2: Player, results: tuple[Player, Player] | None
                 f"The winner is {results[0].user.mention}, because {results[0].user.mention}"
                 " played a card of a winning element."
             )
-        else:
+        elif c1.value != c2.value:
             out += (
                 f"The winner is {results[0].user.mention}, because {results[0].user.mention}"
                 " played a card with a higher number."
+            )
+        else:
+            out += (
+                f"Both players tied, and their played cards have been returned to their decks."
             )
     else:
         out = "Round 1. No results yet."

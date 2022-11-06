@@ -77,7 +77,7 @@ class Game:
                 content=f"Winner: {winner.user.mention}\nLoser: {loser.user.mention}",
             )
         else:
-            self.previous_round_results = None
+            self.previous_round_results = [self.players[0], self.players[1]]
             await self._send_stats(content="There was a tie")
 
         await asyncio.sleep(8)
@@ -110,10 +110,8 @@ class Game:
 
         self.countdown = utils.countdown(20)
 
-        player_names = visuals.format_names(
-            self.players[0].user.username, self.players[1].user.username, length=40
-        )
-        player_seals = visuals.format_seals(self.players[0].seals, self.players[1].seals, length=17)
+        player_names = visuals.format_names(self.players[0].user.username, self.players[1].user.username, length=39)
+        player_seals = visuals.format_seals(self.players[0].seals, self.players[1].seals, length=18)
 
         embed = hikari.Embed(
             title="Game 1",

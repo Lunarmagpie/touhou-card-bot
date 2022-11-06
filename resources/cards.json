@@ -21,16 +21,16 @@
         "special_effect": 0
     },
     "4": {
-        "name": "Marisa Kirisame SR",
-        "img_name" : "marisa_kirisame_sr",
-        "value": 13,
+        "name": "Marisa Kirisame",
+        "img_name" : "marisa_kirisame",
+        "value": 7,
         "type": "FIRE",
         "special_effect": 0
     },
     "5": {
-        "name": "Marisa Kirisame",
-        "img_name" : "marisa_kirisame",
-        "value": 7,
+        "name": "Marisa Kirisame SR",
+        "img_name" : "marisa_kirisame_sr",
+        "value": 13,
         "type": "FIRE",
         "special_effect": 0
     },

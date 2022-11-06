@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e4, 2022-07-14)"
+   sodipodi:docname="xp_bar.svg"
+   inkscape:export-filename="icons/xp_bar.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.1596895"
+     inkscape:cx="271.19328"
+     inkscape:cy="206.5208"
+     inkscape:window-width="1440"
+     inkscape:window-height="869"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient10711">
+      <stop
+         style="stop-color:#2c2c2c;stop-opacity:1;"
+         offset="0"
+         id="stop10705" />
+      <stop
+         style="stop-color:#414141;stop-opacity:1;"
+         offset="0.45945546"
+         id="stop10707" />
+      <stop
+         style="stop-color:#101010;stop-opacity:1;"
+         offset="1"
+         id="stop10709" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient5407">
+      <stop
+         style="stop-color:#000158;stop-opacity:1;"
+         offset="0"
+         id="stop5403" />
+      <stop
+         style="stop-color:#8e75de;stop-opacity:1;"
+         offset="0.45945546"
+         id="stop7713" />
+      <stop
+         style="stop-color:#000920;stop-opacity:1;"
+         offset="1"
+         id="stop5405" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5407"
+       id="linearGradient5409"
+       x1="103.52112"
+       y1="65.176575"
+       x2="103.42571"
+       y2="98.170448"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-6.3473019,-34.815653)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10711"
+       id="linearGradient11883"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-6.3473108,3.5896089)"
+       x1="103.52112"
+       y1="65.176575"
+       x2="103.42571"
+       y2="98.170448" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:url(#linearGradient5409);fill-opacity:1;stroke:#0c0b12;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect788"
+       width="123.1292"
+       height="19.75894"
+       x="36.093388"
+       y="39.598927"
+       rx="10"
+       ry="30" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:0.863529;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect11491"
+       width="34.171921"
+       height="34.171921"
+       x="30.576973"
+       y="32.273232"
+       inkscape:export-filename="icons/xp_full_left.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:0.863529;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect11491-0"
+       width="34.171921"
+       height="34.171921"
+       x="67.39473"
+       y="32.273232"
+       inkscape:export-filename="icons/xp_full_middle.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:0.863529;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect11491-0-0"
+       width="34.171921"
+       height="34.171921"
+       x="130.59473"
+       y="32.273232"
+       inkscape:export-filename="icons/xp_full_right.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:url(#linearGradient11883);fill-opacity:1;stroke:#0c0b12;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect788-4-3"
+       width="123.1292"
+       height="19.75894"
+       x="36.093391"
+       y="78.004181"
+       rx="10"
+       ry="30" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:0.863529;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect11491-9"
+       width="34.171921"
+       height="34.171921"
+       x="30.576973"
+       y="70.67849"
+       inkscape:export-filename="icons/xp_empty_left.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:0.863529;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect11491-0-7"
+       width="34.171921"
+       height="34.171921"
+       x="67.39473"
+       y="70.67849"
+       inkscape:export-filename="icons/xp_empty_middle.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:0.863529;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect11491-0-0-7"
+       width="34.171921"
+       height="34.171921"
+       x="130.59473"
+       y="70.67849"
+       inkscape:export-filename="icons/xp_empty_right.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+  </g>
+</svg>
