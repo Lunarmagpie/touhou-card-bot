@@ -2,6 +2,7 @@ import asyncio
 import functools
 import io
 import typing as t
+import math
 
 import hikari
 from PIL import Image
@@ -11,16 +12,28 @@ import cards
 __all__: t.Sequence[str] = ("get_cards_array_image",)
 
 
-async def get_cards_array_image(player_cards: list[int]) -> hikari.Bytes:
-    output_img = Image.new("RGBA", (1500, 360), (255, 255, 255, 0))
+async def get_cards_array_image(player_cards: list[int], page: int) -> hikari.Bytes:
+    output_img = Image.new("RGBA", (1350, 1440), (255, 255, 255, 0))
 
-    for i, id in enumerate(hand_cards):
-        card_img = Image.open(f"resources/card_png/{cards.CARDS[id].img_name}.png")
-        await asyncio.get_event_loop().run_in_executor(
-            None,
-            functools.partial(card_img.load),
-        )
-        output_img.paste(card_img, (260 * i - 15, 360 - card_img.height), card_img)
+    for i in range(page*20, (page+1)*20):
+        x = (i % 5) * 260 - 15
+        y = math.floor(i % 20 / 5) * 360
+
+        if (i+2) in player_cards:
+            card_img = Image.open(f"resources/card_png/{cards.CARDS[i+2].img_name}.png")
+            await asyncio.get_event_loop().run_in_executor(
+                None,
+                functools.partial(card_img.load),
+            )
+            output_img.paste(card_img, (x,y + 360 - card_img.height), card_img)
+        else:
+            card_img = Image.open(f"resources/card_png/blank.png")
+            await asyncio.get_event_loop().run_in_executor(
+                None,
+                functools.partial(card_img.load),
+            )
+            output_img.paste(card_img, (x,y + 360 - card_img.height), card_img)
+        output_img.save("./out.png")            
 
     with io.BytesIO() as b:
         output_img.save(b, format="png")

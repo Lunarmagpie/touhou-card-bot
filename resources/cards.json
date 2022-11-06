@@ -104,6 +104,13 @@
         "type": "WATER",
         "special_effect": 3
     },
+    "16": {
+        "name": "Hong Meiling",
+        "img_name" : "hong_meiling",
+        "value": 6,
+        "type": "WOOD",
+        "special_effect": 1
+    },
     "17": {
         "name": "Koakuma",
         "img_name" : "koakuma",
