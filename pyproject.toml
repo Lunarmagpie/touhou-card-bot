@@ -6,6 +6,7 @@ dependencies = [
     "hikari>=2.0.0.dev111",
     "hikari-crescent>=0.3.6",
     "hikari-flare @ git+https://github.com/Lunarmagpie/hikari-flare@feat/custom_dataclass",
+    "apgorm>=1.0.0b13",
     "python-dotenv>=0.21.0",
     "Pillow>=9.3.0",
     "mypy>=0.982",
