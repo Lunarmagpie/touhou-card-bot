@@ -32,10 +32,10 @@ async def get_cards_array_image(player_cards: list[int], page: int) -> hikari.By
                 None,
                 functools.partial(card_img.load),
             )
-            output_img.paste(card_img, (x,y + 360 - card_img.height), card_img)
-        output_img.save("./out.png")            
+            output_img.paste(card_img, (x,y + 360 - card_img.height), card_img)     
 
     with io.BytesIO() as b:
-        output_img.save(b, format="png")
+        image_resized = output_img.resize((844,900),1)
+        image_resized.save(b, format="png")
         b.seek(0)
         return hikari.Bytes(b, "card_display.png")

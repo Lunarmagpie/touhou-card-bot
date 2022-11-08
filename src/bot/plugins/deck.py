@@ -1,3 +1,4 @@
+from faulthandler import disable
 import crescent
 import flare
 
@@ -6,6 +7,7 @@ import hikari
 import utils
 import typing as t
 import asyncio
+import visuals
 
 CARD_AMOUNT = len(cards.CARDS)
 PAGES = CARD_AMOUNT // 16 + 1
@@ -14,6 +16,9 @@ plugin = utils.Plugin()
 P = t.ParamSpec("P")
 T = t.TypeVar("T")
 group = crescent.Group("deck")
+
+#EXAMPLE VARIABLE TO MAKE SURE EVERYTHING WORKS DELETE THIS LATER
+cards = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,21,22,25,29,30]
 
 
 @t.runtime_checkable
@@ -26,12 +31,21 @@ class CardButton(flare.Button, label=" ", style=hikari.ButtonStyle.SECONDARY):
     y: int
     page: int
 
+    async def try_disable(self, ctx: flare.Context):
+        if self.x * 5 + self.y + self.page * 20 + 2 not in cards:
+            self.set_disabled(True)
+        else:
+            self.set_disabled(False)
+
     async def callback(self, ctx: flare.Context) -> None:
         await ctx.respond(f"{self.x} {self.y} {self.page}", flags=hikari.MessageFlag.EPHEMERAL)
 
 
 class NextButton(flare.Button, label="Next"):
     page: int
+
+    async def try_disable(self, ctx: flare.Context):
+        ...
 
     async def callback(self, ctx: flare.Context) -> None:
         rows = await ctx.get_components()
@@ -44,12 +58,16 @@ class NextButton(flare.Button, label="Next"):
             for component in row:
                 if isinstance(component, HasPage):
                     component.page = new_page
+                    await component.try_disable(ctx)
 
         await ctx.edit_response(components=await asyncio.gather(*rows))
 
 
 class PrevButton(flare.Button, label="Previous"):
     page: int
+
+    async def try_disable(self, ctx: flare.Context):
+        ...
 
     async def callback(self, ctx: flare.Context) -> None:
         rows = await ctx.get_components()
@@ -62,6 +80,7 @@ class PrevButton(flare.Button, label="Previous"):
             for component in row:
                 if isinstance(component, HasPage):
                     component.page = new_page
+                    await component.try_disable(ctx)
 
         await ctx.edit_response(components=await asyncio.gather(*rows))
 
@@ -75,6 +94,21 @@ async def show_button(ctx: flare.Context, user_id: hikari.Snowflake) -> None:
 async def close_button(ctx: flare.Context) -> None:
     ...
 
+async def build_rows(ctx, cards: list[int], page: int) -> list[flare.Row]:
+    rows = []
+
+    for i in range(0,4):
+        rows.append(flare.Row())
+        for j in range(0,5):
+            if i * 5 + j + page * 20 + 2 in cards:
+                rows[i].append(CardButton(i, j, page))
+            else:
+                rows[i].append(CardButton(i, j, page).set_disabled(True))
+
+    rows.append(flare.Row(NextButton(page), PrevButton(page), show_button(ctx.user.id)))
+
+    return await asyncio.gather(*rows)
+
 
 @plugin.include
 @group.child
@@ -83,15 +117,12 @@ class edit:
     name = crescent.option(str, "The name of the deck you want to edit")
 
     async def callback(self, ctx: utils.Context) -> None:
+        page = 0
+        attachment = await visuals.get_cards_array_image(cards, page)
         await ctx.respond(
             # fmt: off
-            components=await asyncio.gather(
-                flare.Row(CardButton(0, 0, 0), CardButton(1, 0, 0), CardButton(2, 0, 0), CardButton(3, 0, 0), CardButton(4, 0, 0)),
-                flare.Row(CardButton(0, 1, 0), CardButton(1, 1, 0), CardButton(2, 1, 0), CardButton(3, 1, 0), CardButton(4, 1, 0)),
-                flare.Row(CardButton(0, 2, 0), CardButton(1, 2, 0), CardButton(2, 2, 0), CardButton(3, 2, 0), CardButton(4, 2, 0)),
-                flare.Row(CardButton(0, 3, 0), CardButton(1, 3, 0), CardButton(2, 3, 0), CardButton(3, 3, 0), CardButton(4, 3, 0)),
-                flare.Row(NextButton(0), PrevButton(0), show_button(ctx.user.id)),
-            ),
+            components=await build_rows(ctx, cards, page),
             # fmt: on
-            ephemeral=True
+            ephemeral=True,
+            attachment=attachment
         )
