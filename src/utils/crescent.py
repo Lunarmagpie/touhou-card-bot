@@ -1,13 +1,14 @@
 from __future__ import annotations
 
+import typing as t
 
 import crescent
 
-import typing as t
 from utils.config import CONFIG
 
 if t.TYPE_CHECKING:
     import db
+
 
 class Bot(crescent.Bot):
     def __init__(self) -> None:

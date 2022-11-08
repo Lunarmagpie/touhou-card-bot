@@ -1,10 +1,9 @@
-import flare
-
-import utils
 import crescent
-import db
+import flare
 import hikari
 
+import db
+import utils
 
 bot = utils.Bot()
 
