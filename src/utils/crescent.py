@@ -1,15 +1,25 @@
-import typing as t
+from __future__ import annotations
+
 
 import crescent
 
-import db
+import typing as t
+from utils.config import CONFIG
 
+if t.TYPE_CHECKING:
+    import db
 
 class Bot(crescent.Bot):
-    def __init__(self, *args: t.Any, **kwargs: t.Any):
-        self.db = db.JsonConn()
+    def __init__(self) -> None:
 
-        super().__init__(*args, **kwargs)
+        self._db: db.Database | None = None
+
+        super().__init__(CONFIG.token)
+
+    @property
+    def db(self) -> db.Database:
+        assert self._db
+        return self._db
 
 
 class Context(crescent.Context):

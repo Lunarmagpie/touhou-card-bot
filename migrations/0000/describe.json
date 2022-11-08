@@ -1,0 +1,79 @@
+{
+    "tables": [
+        {
+            "name": "players",
+            "fields": [
+                {
+                    "name": "id",
+                    "type_": "BIGINT",
+                    "not_null": true
+                },
+                {
+                    "name": "decks",
+                    "type_": "JSON",
+                    "not_null": true
+                },
+                {
+                    "name": "cards",
+                    "type_": "INTEGER[]",
+                    "not_null": true
+                }
+            ],
+            "fk_constraints": [],
+            "pk_constraint": {
+                "name": "_players_id_primary_key",
+                "raw_sql": "CONSTRAINT _players_id_primary_key PRIMARY KEY ( id )"
+            },
+            "unique_constraints": [],
+            "check_constraints": [],
+            "exclude_constraints": []
+        },
+        {
+            "name": "interactions",
+            "fields": [
+                {
+                    "name": "serial_id",
+                    "type_": "SERIAL",
+                    "not_null": true
+                },
+                {
+                    "name": "id",
+                    "type_": "BIGINT",
+                    "not_null": true
+                },
+                {
+                    "name": "token",
+                    "type_": "VARCHAR",
+                    "not_null": true
+                }
+            ],
+            "fk_constraints": [],
+            "pk_constraint": {
+                "name": "_interactions_serial_id_primary_key",
+                "raw_sql": "CONSTRAINT _interactions_serial_id_primary_key PRIMARY KEY ( serial_id )"
+            },
+            "unique_constraints": [],
+            "check_constraints": [],
+            "exclude_constraints": []
+        },
+        {
+            "name": "_migrations",
+            "fields": [
+                {
+                    "name": "id_",
+                    "type_": "INTEGER",
+                    "not_null": true
+                }
+            ],
+            "fk_constraints": [],
+            "pk_constraint": {
+                "name": "__migrations_id__primary_key",
+                "raw_sql": "CONSTRAINT __migrations_id__primary_key PRIMARY KEY ( id_ )"
+            },
+            "unique_constraints": [],
+            "check_constraints": [],
+            "exclude_constraints": []
+        }
+    ],
+    "indexes": []
+}

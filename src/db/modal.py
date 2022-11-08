@@ -1,24 +1,12 @@
 from __future__ import annotations
 
-import dataclasses
-import typing as t
-
-import typing_extensions
+import apgorm
+import apgorm.types
 
 
-@typing_extensions.dataclass_transform()
-class BaseModal:
-    def __init_subclass__(cls) -> None:
-        dataclasses.dataclass(kw_only=True)(cls)
+class PlayerModel(apgorm.Model):
+    id = apgorm.types.BigInt().field()
+    decks = apgorm.types.Json().field()
+    cards = apgorm.types.Array(apgorm.types.Int()).field()
 
-    def to_dict(self) -> dict[str, t.Any]:
-        return dataclasses.asdict(self)
-
-
-@dataclasses.dataclass
-class PlayerModal(BaseModal):
-    decks: dict[int, list[int]]
-
-    @classmethod
-    def default(cls) -> PlayerModal:
-        return cls(decks={})
+    primary_key = (id,)

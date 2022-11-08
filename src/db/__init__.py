@@ -1,6 +1,6 @@
 import typing as t
 
-from db.json_db import JsonConn
-from db.modal import PlayerModal
+from db.db import Database
+from db.modal import PlayerModel
 
-__all__: t.Sequence[str] = ("JsonConn", "PlayerModal")
+__all__: t.Sequence[str] = ("Database", "PlayerModel")
